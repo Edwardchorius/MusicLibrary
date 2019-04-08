@@ -22,5 +22,9 @@ namespace ML.Data.Models
 
         [Required]
         public decimal Cost { get; set; }
+
+        public ICollection<UsersTracks> UsersTracks { get; set; }
+
+        public ICollection<TracksPlayLists> TracksPlayLists { get; set; }
     }
 }

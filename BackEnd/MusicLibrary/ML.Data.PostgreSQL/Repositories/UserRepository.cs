@@ -9,6 +9,7 @@ namespace ML.Data.PostgreSQL.Repositories
     {
         public UserRepository(IPostgreSQLDataContext context) : base(context)
         {
+
         }
 
         public User FindByUsername(string part)

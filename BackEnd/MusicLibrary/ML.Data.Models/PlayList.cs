@@ -22,5 +22,7 @@ namespace ML.Data.Models
 
         [Required]
         public string Description { get; set; }
+
+        public ICollection<TracksPlayLists> TracksPlayLists { get; set; }
     }
 }

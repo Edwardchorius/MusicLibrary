@@ -10,8 +10,13 @@ namespace ML.Data.Models
 
         [Required]
         public Wallet Wallet { get; set; }
+
         public ulong WalletId { get; set; }
+
         public IEnumerable<Track> Tracks { get; set; }
+
         public IEnumerable<PlayList> PlayLists { get; set; }
+
+        public ICollection<UsersTracks> UsersTracks { get; set; }
     }
 }
