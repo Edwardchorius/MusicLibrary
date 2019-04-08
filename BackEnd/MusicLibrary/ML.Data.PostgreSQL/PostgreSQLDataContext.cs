@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ML.Data.Models;
+using ML.Data.PostgreSQL.Configurations;
 
 namespace ML.Data.PostgreSQL
 {
@@ -21,7 +22,7 @@ namespace ML.Data.PostgreSQL
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            throw new System.NotImplementedException();
+            builder.ApplyConfiguration(new UsersTracksConfiguration());
         }
     }
 }
