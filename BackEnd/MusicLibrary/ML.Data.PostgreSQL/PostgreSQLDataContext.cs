@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using ML.Data.Models;
 using ML.Data.PostgreSQL.Configurations;
 

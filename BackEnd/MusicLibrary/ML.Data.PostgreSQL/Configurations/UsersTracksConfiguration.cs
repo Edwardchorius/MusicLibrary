@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ML.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ML.Data.PostgreSQL.Configurations
 {
