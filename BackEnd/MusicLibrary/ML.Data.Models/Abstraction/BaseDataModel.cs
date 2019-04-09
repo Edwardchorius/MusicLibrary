@@ -4,7 +4,7 @@ namespace ML.Data.Models.Abstraction
 {
     public abstract class BaseDataModel : IDataModel
     {
-        public ulong Id { get; set; }
+        public int Id { get; set; }
         
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

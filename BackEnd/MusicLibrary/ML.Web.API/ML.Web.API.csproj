@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ML.Data.PostgreSQL\ML.Data.PostgreSQL.csproj" />
     <ProjectReference Include="..\ML.Web.API.IoC\ML.Web.API.IoC.csproj" />
   </ItemGroup>
 

@@ -6,9 +6,9 @@ namespace ML.Data.Models
 {
     public class UsersTracks
     {
-        public ulong UserId { get; set; }
+        public int UserId { get; set; }
 
-        public ulong TrackId { get; set; }
+        public int TrackId { get; set; }
 
         public User User { get; set; }
 

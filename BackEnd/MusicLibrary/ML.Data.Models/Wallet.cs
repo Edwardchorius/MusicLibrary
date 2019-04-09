@@ -6,7 +6,7 @@ namespace ML.Data.Models
 {
     public class Wallet : BaseDataModel
     {
-        public ulong UserId { get; set; }
+        public int UserId { get; set; }
         [Required]
         public User User { get; set; }
 

@@ -1,14 +1,14 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ML.Data.Models;
 using ML.Data.PostgreSQL.Configurations;
+
 
 namespace ML.Data.PostgreSQL
 {
     internal class PostgreSQLDataContext : DbContext, IPostgreSQLDataContext
     {
-        internal PostgreSQLDataContext(DbContextOptions<PostgreSQLDataContext> options)
-            : base(options)
+        public PostgreSQLDataContext()
         {
 
         }
@@ -21,9 +21,21 @@ namespace ML.Data.PostgreSQL
 
         public DbSet<PlayList> PlayLists { get; set; }
 
+        public IConfiguration Configuration { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UsersTracksConfiguration());
+            builder.ApplyConfiguration(new TracksPlayListsConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new PlayListConfiguration());
+
+            base.OnModelCreating(builder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=eduard.vaklinov_96"); // TODO => Should hide connection string !!!
         }
     }
 }

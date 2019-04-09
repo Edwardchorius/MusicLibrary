@@ -9,7 +9,7 @@ namespace ML.Data.Models
     public class PlayList : BaseDataModel
     {
         [Required]
-        public ulong OwnerId { get; set; }
+        public int OwnerId { get; set; }
 
         [Required]
         public User Owner { get; set; }

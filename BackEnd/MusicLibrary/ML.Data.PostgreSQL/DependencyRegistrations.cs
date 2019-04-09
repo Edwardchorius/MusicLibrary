@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using ML.Data.Abstraction.Repositories;
 using ML.Data.PostgreSQL;
 using ML.Data.PostgreSQL.Repositories;
@@ -7,10 +8,12 @@ public static class DependencyRegistrations
 {
     public static IServiceCollection RegisterPostgreSQLDependencies(this IServiceCollection services)
     {
-        services.AddSingleton<IPostgreSQLDataContext, PostgreSQLDataContext>();
-
         services.AddTransient<IUserRepository, UserRepository>();
 
+        services.AddEntityFrameworkNpgsql()
+            .AddDbContext<PostgreSQLDataContext>()
+            .BuildServiceProvider();
+        
         return services;
     }
 }
