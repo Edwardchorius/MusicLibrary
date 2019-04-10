@@ -14,18 +14,21 @@ namespace ML.Data
         public DataUnitOfWork(
             IPostgreSQLDataContext postgreSQLDataContext,
             IFileSystemDataContext fileSystemContext,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IWalletRepository walletRepository)
         {
             this.postgreSQLDataContext = postgreSQLDataContext;
             this.fileSystemContext = fileSystemContext;
-            UserRepository = userRepository;
+            this.UserRepository = userRepository;
+            this.WalletRepository = walletRepository;
         }
 
         public IUserRepository UserRepository { get; }
-
-        public void SaveChanges()
+        public IWalletRepository WalletRepository { get; }
+        
+        public int SaveChanges()
         {
-            throw new System.NotImplementedException();
+            return this.postgreSQLDataContext.SaveChanges();
         }
 
         public Task SaveChangesAsync()

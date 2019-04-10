@@ -6,8 +6,9 @@ namespace ML.Data.Abstraction
     public interface IDataUnitOfWork
     {
         IUserRepository UserRepository { get; }
+        IWalletRepository WalletRepository { get; }
 
-        void SaveChanges();
+        int SaveChanges();
                
         Task SaveChangesAsync();
     }

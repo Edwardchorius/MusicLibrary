@@ -9,6 +9,8 @@ public static class DependencyRegistrations
     public static IServiceCollection RegisterPostgreSQLDependencies(this IServiceCollection services)
     {
         services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IWalletRepository, WalletRepository>();
+        services.AddTransient<IPostgreSQLDataContext, PostgreSQLDataContext>();
 
         services.AddEntityFrameworkNpgsql()
             .AddDbContext<PostgreSQLDataContext>()

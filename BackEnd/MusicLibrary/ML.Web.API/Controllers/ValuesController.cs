@@ -8,6 +8,7 @@ using ML.Services.Abstraction;
 namespace ML.Web.API.Controllers
 {
     [Route("api/[controller]")]
+    [AutoValidateAntiforgeryToken]
     public class ValuesController : Controller
     {
         private readonly ITestDataService service;

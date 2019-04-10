@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ML.Data.Models.Abstraction
 {
     public abstract class BaseDataModel : IDataModel
     {
+        [Key]
         public int Id { get; set; }
         
         public string CreatedBy { get; set; }

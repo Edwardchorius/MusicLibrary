@@ -30,6 +30,8 @@ namespace ML.Web.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseMvc();
         }
     }
