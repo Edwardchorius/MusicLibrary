@@ -4,6 +4,8 @@ using ML.Data.Models.Enums;
 using ML.Services.Abstraction;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace ML.Services.Data
 {
@@ -11,19 +13,24 @@ namespace ML.Services.Data
     {
         private readonly IDataUnitOfWork data;
 
-        public TestDataService(IDataUnitOfWork dataUnitOfWork) 
+        public TestDataService(IDataUnitOfWork dataUnitOfWork)
         {
             this.data = dataUnitOfWork;
         }
 
         public void Test()
+
         {
+
+            var x = data.UserRepository.All().Count();
+            Debug.WriteLine(x);
+
             var user = new User
             {
                 Username = "demoUser",
-                Tracks = new List<Track>(),
-                PlayLists = new List<PlayList>(),
-                UsersTracks = new List<UsersTracks>(),
+                //Tracks = new List<Track>(),
+                //PlayLists = new List<PlayList>(),
+                //UsersTracks = new List<UsersTracks>(),
             };
 
             var wallet = new Wallet
@@ -33,15 +40,16 @@ namespace ML.Services.Data
                 CreatedOn = DateTime.Now
             };
 
-            user.Wallet = wallet;
-            wallet.User = user;
+            //user.Wallet = wallet;
+            //wallet.User = user;
 
             data.UserRepository.Add(user);
-            data.WalletRepository.Add(wallet);
-
-            // some other code that do stuff 
+            //data.WalletRepository.Add(wallet);
 
             data.SaveChanges();
+
+            var x2 = data.UserRepository.All().Count();
+            Debug.WriteLine(x2);
         }
     }
 }

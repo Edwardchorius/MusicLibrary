@@ -22,6 +22,8 @@ namespace ML.Web.API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            service.Test();
+
             return new string[] { "value1", "value2" };
         }
 
@@ -29,7 +31,6 @@ namespace ML.Web.API.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            service.Test();
             return "value";
         }
 

@@ -11,15 +11,15 @@ namespace ML.Data.PostgreSQL.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasOne(user => user.Wallet)
-                .WithOne(wallet => wallet.User)
-                .HasForeignKey<Wallet>(wallet => wallet.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne(user => user.Wallet)
+            //    .WithOne(wallet => wallet.User)
+            //    .HasForeignKey<Wallet>(wallet => wallet.UserId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(user => user.PlayLists)
-                .WithOne(playlist => playlist.Owner)
-                .HasForeignKey(user => user.OwnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(user => user.PlayLists)
+            //    .WithOne(playlist => playlist.Owner)
+            //    .HasForeignKey(user => user.OwnerId)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

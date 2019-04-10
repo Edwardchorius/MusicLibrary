@@ -6,7 +6,7 @@ public static class DependencyRegistrations
 {
     public static IServiceCollection RegisterDataDependencies(this IServiceCollection services)
     {
-        services.AddTransient<IDataUnitOfWork, DataUnitOfWork>();
+        services.AddScoped<IDataUnitOfWork, DataUnitOfWork>();
 
         return services;
     }

@@ -8,15 +8,14 @@ namespace ML.Data.Models
     {
         public string Username { get; set; }
 
-        [Required]
         public Wallet Wallet { get; set; }
 
         public int WalletId { get; set; }
 
-        public IEnumerable<Track> Tracks { get; set; }
+        //public IEnumerable<Track> Tracks { get; set; }
 
-        public IEnumerable<PlayList> PlayLists { get; set; }
+        //public IEnumerable<PlayList> PlayLists { get; set; }
 
-        public ICollection<UsersTracks> UsersTracks { get; set; }
+        //public ICollection<UsersTracks> UsersTracks { get; set; }
     }
 }

@@ -8,34 +8,40 @@ namespace ML.Data.PostgreSQL
 {
     internal class PostgreSQLDataContext : DbContext, IPostgreSQLDataContext
     {
-        public PostgreSQLDataContext()
+        public PostgreSQLDataContext(DbContextOptions<PostgreSQLDataContext> options) : base(options)
         {
 
         }
 
         public DbSet<User> Users { get; set; }
-
-        public DbSet<Track> Tracks { get; set; }
-
+        
         public DbSet<Wallet> Wallets { get; set; }
 
-        public DbSet<PlayList> PlayLists { get; set; }
+        //public DbSet<Track> Tracks { get; set; }
+
+        //public DbSet<PlayList> PlayLists { get; set; }
 
         public IConfiguration Configuration { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new UsersTracksConfiguration());
-            builder.ApplyConfiguration(new TracksPlayListsConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new PlayListConfiguration());
+            //builder.ApplyConfiguration(new UsersTracksConfiguration());
+            //builder.ApplyConfiguration(new TracksPlayListsConfiguration());
+            //builder.ApplyConfiguration(new UserConfiguration());
+
+            builder.Entity<User>()
+                .HasOne(x => x.Wallet)
+                .WithOne(x => x.User)
+                .HasForeignKey<Wallet>(x => x.Id);
+
+            //builder.ApplyConfiguration(new PlayListConfiguration());
 
             base.OnModelCreating(builder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=eduard.vaklinov_96"); // TODO => Should hide connection string !!!
+            optionsBuilder.UseNpgsql("Host=localhost;Database=MLData;Username=postgres;Password=eduard.vaklinov_96"); // TODO => Should hide connection string !!!
         }
     }
 }
