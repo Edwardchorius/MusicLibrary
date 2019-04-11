@@ -10,11 +10,11 @@ namespace ML.Data.PostgreSQL
 
         DbSet<User> Users { get; set; }
 
-        //DbSet<Track> Tracks { get; set; }
+        DbSet<Track> Tracks { get; set; }
 
         DbSet<Wallet> Wallets { get; set; }
 
-        //DbSet<PlayList> PlayLists { get; set; }
+        DbSet<PlayList> PlayLists { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
     }

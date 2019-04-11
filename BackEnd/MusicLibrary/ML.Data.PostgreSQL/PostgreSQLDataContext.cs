@@ -17,24 +17,20 @@ namespace ML.Data.PostgreSQL
         
         public DbSet<Wallet> Wallets { get; set; }
 
-        //public DbSet<Track> Tracks { get; set; }
+        public DbSet<Track> Tracks { get; set; }
 
-        //public DbSet<PlayList> PlayLists { get; set; }
+        public DbSet<PlayList> PlayLists { get; set; }
 
         public IConfiguration Configuration { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.ApplyConfiguration(new UsersTracksConfiguration());
-            //builder.ApplyConfiguration(new TracksPlayListsConfiguration());
-            //builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UsersTracksConfiguration());
+            builder.ApplyConfiguration(new TracksPlayListsConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new PlayListConfiguration());
 
-            builder.Entity<User>()
-                .HasOne(x => x.Wallet)
-                .WithOne(x => x.User)
-                .HasForeignKey<Wallet>(x => x.Id);
-
-            //builder.ApplyConfiguration(new PlayListConfiguration());
+            builder.ForNpgsqlUseSequenceHiLo();
 
             base.OnModelCreating(builder);
         }

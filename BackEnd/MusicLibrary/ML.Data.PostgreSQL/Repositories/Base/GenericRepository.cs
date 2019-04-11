@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ML.Data.Abstraction.Repositories.Base;
 
@@ -23,7 +22,7 @@ namespace ML.Data.PostgreSQL.Repositories.Base
 
         public IEnumerable<T> All()
         {
-            return set.ToArray();
+            throw new System.NotImplementedException();
         }
 
         public void Delete(T entity)
@@ -33,7 +32,7 @@ namespace ML.Data.PostgreSQL.Repositories.Base
 
         public void Update(T entity)
         {
-            throw new System.NotImplementedException();
+            this.set.Update(entity);
         }
     }
 }

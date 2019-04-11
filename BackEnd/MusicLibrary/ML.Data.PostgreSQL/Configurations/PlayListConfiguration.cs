@@ -8,9 +8,9 @@ namespace ML.Data.PostgreSQL.Configurations
     {
         public void Configure(EntityTypeBuilder<PlayList> builder)
         {
-            //builder.HasOne(pl => pl.Owner)
-            //    .WithMany(u => u.PlayLists)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(pl => pl.Owner)
+                .WithMany(u => u.PlayLists)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

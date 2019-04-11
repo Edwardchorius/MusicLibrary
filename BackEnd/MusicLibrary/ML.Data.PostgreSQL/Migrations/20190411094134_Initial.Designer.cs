@@ -10,16 +10,18 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ML.Data.PostgreSQL.Migrations
 {
     [DbContext(typeof(PostgreSQLDataContext))]
-    [Migration("20190410202523_Initial")]
+    [Migration("20190411094134_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+                .HasAnnotation("Npgsql:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SequenceHiLo)
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'");
 
             modelBuilder.Entity("ML.Data.Models.PlayList", b =>
                 {

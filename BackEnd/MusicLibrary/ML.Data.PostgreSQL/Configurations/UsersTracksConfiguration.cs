@@ -8,15 +8,15 @@ namespace ML.Data.PostgreSQL.Configurations
     {
         public void Configure(EntityTypeBuilder<UsersTracks> builder)
         {
-            //builder.HasKey(ut => new { ut.UserId, ut.TrackId });
+            builder.HasKey(ut => new { ut.UserId, ut.TrackId });
 
-            //builder.HasOne<User>(ut => ut.User)
-            //    .WithMany(u => u.UsersTracks)
-            //    .HasForeignKey(ut => ut.UserId);
+            builder.HasOne<User>(ut => ut.User)
+                .WithMany(u => u.UsersTracks)
+                .HasForeignKey(ut => ut.UserId);
 
-            //builder.HasOne<Track>(ut => ut.Track)
-            //    .WithMany(t => t.UsersTracks)
-            //    .HasForeignKey(ut => ut.TrackId);
+            builder.HasOne<Track>(ut => ut.Track)
+                .WithMany(t => t.UsersTracks)
+                .HasForeignKey(ut => ut.TrackId);
         }
     }
 }

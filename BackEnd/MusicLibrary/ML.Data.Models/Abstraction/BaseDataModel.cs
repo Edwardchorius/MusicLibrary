@@ -5,9 +5,6 @@ namespace ML.Data.Models.Abstraction
 {
     public abstract class BaseDataModel : IDataModel
     {
-        [Key]
-        public int Id { get; set; }
-        
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
 
