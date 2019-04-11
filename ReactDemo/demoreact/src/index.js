@@ -1,60 +1,46 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-import lowerCaseAndSort from './utils/string-utils';
+import { getPeople } from './services/star-wars-service';
 
 
+class StarWarsPeopleList extends Component {
+    constructor(props) {
+        super(props);
 
-function Nav(props)
-{
-    const {className} = props;
+        this.state = {
+            people : [],
+            isLoading : true
+        };
+    }
 
-    return (
-        <nav className={className}>
-             <ul>
-                <li>
-                     <a href='#'>Home</a>
-                 </li>
+    render() {
+
+        const { people , isLoading} = this.state;
+
+        if(isLoading){
+            return <div>Loading...</div>
+        }
+
+        return (
+            <ul>
+                {
+                    people.map(person => {
+                        return <li>{person.name}</li>
+                    })
+                }
             </ul>
-        </nav>
-    );
-}
+        );
+    }
 
-function Footer(props) {
-    const footerClass = 'footer';
-    const footerNavClass = `${footerClass}-navigation`;
-
-    return(
-        <footer>
-            <Nav className={footerNavClass}/>
-        </footer>
-    );
+    componentDidMount() {      
+        getPeople()
+            .then((people) => {
+            this.setState({ people, isLoading : false }) //if the key and value are the same we can write only the key not people : people
+        });
+    }
 }
 
 
-
-function Header(props) {
-    const headerClass = 'header';
-    const headerNavClass = `${headerClass}-navigation`;
-
-    return (
-        <header>
-            <Nav className={headerNavClass}/>
-        </header>
-    );
-}
-
-function HeaderAndFooter() {
-    return (
-        <Fragment>
-            <Header />
-            <Footer />
-        </Fragment>
-    );
-}
-
-ReactDOM.render(<HeaderAndFooter />, document.getElementById('root'));
-
-serviceWorker.unregister();
+ReactDOM.render(<StarWarsPeopleList/>, document.getElementById('root'));
