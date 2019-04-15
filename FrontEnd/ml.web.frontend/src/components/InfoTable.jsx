@@ -1,5 +1,6 @@
-import React, {Fragment, Component} from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import React, { Component } from 'react';
+import { MDBContainer, MDBTable, MDBTableBody,
+     MDBTableHead } from 'mdbreact';
 import { getTableInformation } from "../services/star-wars-service";
 import 'bootstrap/scss/bootstrap.scss';
 
@@ -16,20 +17,20 @@ class InfoTable extends Component {
             
           const { info } = this.state;
           const filterText = this.props.filterText;
-          const names = [];
-          const shipClasses = [];
+          const ships = [];
 
            info.forEach((sh) => {
                if(sh.name.indexOf(filterText) === -1 ){
                    return;
                }
-               names.push(sh);
+               ships.push(sh);
            });
+          
 
            return (  
                <MDBContainer>
                    <MDBTable hover>
-                       <MDBTableHead className="primary-color">
+                       <MDBTableHead>
                            <tr>
                                <th>#</th>
                                <th>Spaceship Name</th>
@@ -37,9 +38,9 @@ class InfoTable extends Component {
                            </tr>
                        </MDBTableHead>
                        <MDBTableBody>
-                           {names.map(function(x) {
+                           {ships.map(function(x) {
                                return <tr>
-                                   <td>{names.indexOf(x) + 1}</td>
+                                   <td>{ships.indexOf(x) + 1}</td>
                                    <td>{x.name}</td>
                                    <td>{x.starship_class}</td>
                                </tr>
