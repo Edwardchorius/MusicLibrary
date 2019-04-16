@@ -3,7 +3,7 @@ import 'bootstrap/scss/bootstrap.scss';
 import { MDBContainer, MDBRow,
      MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import { getTableInformation } from '../services/star-wars-service';
-
+import AddedToPlaylist from './AddedToPlaylist';
 
  class FormPage extends Component{
             constructor(props){
@@ -11,41 +11,40 @@ import { getTableInformation } from '../services/star-wars-service';
 
                 this.state = {
                     info: [],
-                    newShips: [],
-                    isToggleOn : false
+                    newShips: []
                 };
                 this.addToList = this.addToList.bind(this);
             }          
-
-         render() {          
+            
+         render() { 
             return (
+                <Fragment>
                 <MDBContainer className="float-left">
                     <MDBRow>
                         <MDBCol md="6">
-                            <form>
                                 <p className="h5 text-center mb-4">Create Your Playlist</p>
-                            </form>
                         </MDBCol>
                     </MDBRow>
                     <div>
                         <MDBTable hover>
                             <MDBTableBody>
-                                {this.state.info.map(function(x) {
+                                {this.state.info.map(x => {
                             return <Fragment>
                                         <tr>
                                             <td>
                                                 {x.name}
                                             </td>
-                                            <button className="primary">
+                                            <button key={x.name} onClick={() => this.addToList(x.name)}>
                                                 Add To Playlist
                                             </button>
                                         </tr>
                                     </Fragment>
                                 })}
-                            </MDBTableBody>
-                        </MDBTable>
+                            </MDBTableBody>                               
+                        </MDBTable>                      
                     </div>
-                </MDBContainer>
+                </MDBContainer>               
+                </Fragment>
             );
         };
 
@@ -57,9 +56,9 @@ import { getTableInformation } from '../services/star-wars-service';
         }
 
         addToList(event) {
-            this.setState({
-                info: info.splice(info.indexOf(event.target.value.name), 1)
-            });
+            this.setState((prevState) => ({
+                newShips: [...this.state.newShips, prevState.info.splice(prevState.info.indexOf(event), 1)],      
+            }));
         }
     }
 

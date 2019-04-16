@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react';
+import React, { Component } from 'react';
 import SearchBar from "./SearchBar";
 import InfoTable from "./InfoTable";
 
