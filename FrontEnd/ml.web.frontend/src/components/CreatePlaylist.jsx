@@ -3,7 +3,6 @@ import 'bootstrap/scss/bootstrap.scss';
 import { MDBContainer, MDBRow,
      MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import { getTableInformation } from '../services/star-wars-service';
-import AddedToPlaylist from './AddedToPlaylist';
 
  class FormPage extends Component{
             constructor(props){

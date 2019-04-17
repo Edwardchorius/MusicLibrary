@@ -9,8 +9,36 @@ class InfoTable extends Component {
             super(props);
 
             this.state = {
-                info: []
+                info: [],
+                currentPage: this.props.page,
             };
+
+            this.setNextPage = this.setNextPage.bind(this);
+            this.setPreviousPage = this.setPreviousPage.bind(this);
+            this.updatePage = this.updatePage.bind(this);
+        }
+
+
+        setNextPage = (event) => {
+            if(this.state.info.length >= 10){
+                this.setState( {
+                    currentPage: this.state.currentPage + 1,
+                });
+            }
+        }
+
+        setPreviousPage = () => {
+            if(this.state.currentPage > 1){
+            this.setState({
+                currentPage: this.state.currentPage - 1,
+            })};
+        }
+
+        updatePage = (x) => {
+            getTableInformation(x)
+            .then((info) => {
+                this.setState({info : info})
+            });
         }
 
         render() {
@@ -25,9 +53,9 @@ class InfoTable extends Component {
                }
                ships.push(sh);
            });
-          
+           
 
-           return (  
+           return (   
                <MDBContainer>
                    <MDBTable hover>
                        <MDBTableHead>
@@ -46,16 +74,30 @@ class InfoTable extends Component {
                                </tr>
                            })}
                        </MDBTableBody>
-                   </MDBTable>
+                   </MDBTable>      
+                   <button  onClick={this.setPreviousPage} className="float-left">previous page</button>
+                   <button  onClick={this.setNextPage} className="float-right">next page</button>
                </MDBContainer>        
            )
     }
 
     componentDidMount() {
-        getTableInformation()
-            .then((info) => {
-                this.setState({info : info})
-            });
+        const p = this.state.currentPage;
+
+        this.updatePage(p);
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        const current = this.state.currentPage;
+        const lastPage = prevProps.page;
+
+        if (current !== lastPage) {
+            this.updatePage(current);            
+        }
+        else
+        {
+            this.updatePage(lastPage);
+        }
     }
 }
 

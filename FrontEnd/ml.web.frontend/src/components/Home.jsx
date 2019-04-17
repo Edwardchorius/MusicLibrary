@@ -7,7 +7,8 @@ class Home extends Component{
         super(props);
 
         this.state = {
-            filterText : ''
+            filterText : '',
+            page: 1,
         };
 
         this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
@@ -19,16 +20,20 @@ class Home extends Component{
         });
     }
 
+
     render() {
+        const { page } = this.state;
+
         return (
             <div>
                 <SearchBar
                     filterText={this.state.filterText}
                     onFilterTextChange={this.handleFilterTextChange}
                 />
-                <InfoTable
+                <InfoTable 
                     tableInformation={this.getTableInformation}
                     filterText={this.state.filterText}
+                    page={page}
                 />
             </div>
         );
