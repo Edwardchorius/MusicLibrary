@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using ML.Data.Models;
 using ML.Data.PostgreSQL.Configurations;
-
+using System;
+using System.Linq;
 
 namespace ML.Data.PostgreSQL
 {

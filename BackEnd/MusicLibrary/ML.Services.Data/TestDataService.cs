@@ -18,29 +18,11 @@ namespace ML.Services.Data
             this.data = dataUnitOfWork;
         }
 
-        public void Test()
-
+        public IEnumerable<User> Test()
         {
-            var user = new User
-            {
-                Username = "demoUser2",
-                Tracks = new List<Track>(),
-                PlayLists = new List<PlayList>(),
-                UsersTracks = new List<UsersTracks>(),
-            };
+            var users = this.data.UserRepository.All();
 
-
-            var wallet = new Wallet
-            {
-                Currency = Currency.EUR,
-                Balance = 0,
-                CreatedOn = DateTime.Now
-            };
-
-            user.Wallet = wallet;
-           
-            data.UserRepository.Add(user);
-            data.SaveChanges();
+            return users;
         }
     }
 }

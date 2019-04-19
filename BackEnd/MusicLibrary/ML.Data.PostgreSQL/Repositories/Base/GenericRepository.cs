@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ML.Data.Abstraction.Repositories.Base;
+using ML.Data.Models;
 
 namespace ML.Data.PostgreSQL.Repositories.Base
 {
@@ -22,7 +24,7 @@ namespace ML.Data.PostgreSQL.Repositories.Base
 
         public IEnumerable<T> All()
         {
-            throw new System.NotImplementedException();
+            return this.set.AsEnumerable();
         }
 
         public void Delete(T entity)
