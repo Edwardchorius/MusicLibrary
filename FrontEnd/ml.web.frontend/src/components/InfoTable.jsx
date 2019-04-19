@@ -19,7 +19,7 @@ class InfoTable extends Component {
         }
 
 
-        setNextPage = (event) => {
+        setNextPage = () => {
             if(this.state.info.length >= 10){
                 this.setState( {
                     currentPage: this.state.currentPage + 1,
@@ -42,12 +42,10 @@ class InfoTable extends Component {
         }
 
         render() {
-            
-          const { info } = this.state;
           const filterText = this.props.filterText;
           const ships = [];
 
-           info.forEach((sh) => {
+           this.state.info.forEach((sh) => {
                if(sh.name.indexOf(filterText) === -1 ){
                    return;
                }
