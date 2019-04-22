@@ -20,11 +20,11 @@ namespace ML.Web.API.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            service.Test();
+            var data = service.Test();
 
-            return new string[] { "value1", "value2" };
+            return Json(data);
         }
 
         // GET api/values/5
@@ -38,6 +38,7 @@ namespace ML.Web.API.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            Console.WriteLine();
         }
 
         // PUT api/values/5
@@ -50,6 +51,18 @@ namespace ML.Web.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        private void Recursion(int number)
+        {
+            Console.WriteLine(number);
+
+            if(number == 10)
+            {
+                return;
+            }
+
+            Recursion(number++);
         }
     }
 }

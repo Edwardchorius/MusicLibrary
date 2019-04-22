@@ -11,15 +11,15 @@ namespace ML.Data.PostgreSQL.Configurations
     {
         public void Configure(EntityTypeBuilder<TracksPlayLists> builder)
         {
-            //builder.HasKey(tp => new { tp.TrackId, tp.PlayListId });
+            builder.HasKey(tp => new { tp.TrackId, tp.PlayListId });
 
-            //builder.HasOne<Track>(tp => tp.Track)
-            //    .WithMany(track => track.TracksPlayLists)
-            //    .HasForeignKey(tp => tp.TrackId);
+            builder.HasOne<Track>(tp => tp.Track)
+                .WithMany(track => track.TracksPlayLists)
+                .HasForeignKey(tp => tp.TrackId);
 
-            //builder.HasOne<PlayList>(tp => tp.PlayList)
-            //    .WithMany(playlist => playlist.TracksPlayLists)
-            //    .HasForeignKey(tp => tp.PlayListId);
+            builder.HasOne<PlayList>(tp => tp.PlayList)
+                .WithMany(playlist => playlist.TracksPlayLists)
+                .HasForeignKey(tp => tp.PlayListId);
         }
     }
 }

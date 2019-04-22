@@ -8,6 +8,9 @@ namespace ML.Data.Models
 {
     public class PlayList : BaseDataModel
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public int OwnerId { get; set; }
 

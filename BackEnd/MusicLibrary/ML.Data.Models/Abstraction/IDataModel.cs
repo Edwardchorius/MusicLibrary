@@ -6,8 +6,6 @@ namespace ML.Data.Models.Abstraction
 {
     public interface IDataModel
     {
-        int Id { get; set; }
-
         string CreatedBy { get; set; }
         DateTime CreatedOn { get; set; }
 

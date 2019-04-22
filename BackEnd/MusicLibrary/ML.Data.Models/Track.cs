@@ -8,6 +8,9 @@ namespace ML.Data.Models
 {
     public class Track : BaseDataModel
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public string Author { get; set; }
 

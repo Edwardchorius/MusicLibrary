@@ -1,7 +1,10 @@
-﻿namespace ML.Services.Abstraction
+﻿using ML.Data.Models;
+using System.Collections.Generic;
+
+namespace ML.Services.Abstraction
 {
     public interface ITestDataService
     {
-        void Test();
+        IEnumerable<User> Test();
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ML.Data.Abstraction.Repositories.Base;
+using ML.Data.Models;
 
 namespace ML.Data.PostgreSQL.Repositories.Base
 {
@@ -23,7 +24,7 @@ namespace ML.Data.PostgreSQL.Repositories.Base
 
         public IEnumerable<T> All()
         {
-            return set.ToArray();
+            return this.set.AsEnumerable();
         }
 
         public void Delete(T entity)
@@ -33,7 +34,7 @@ namespace ML.Data.PostgreSQL.Repositories.Base
 
         public void Update(T entity)
         {
-            throw new System.NotImplementedException();
+            this.set.Update(entity);
         }
     }
 }
