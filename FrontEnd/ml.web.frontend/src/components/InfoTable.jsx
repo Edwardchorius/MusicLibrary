@@ -3,6 +3,7 @@ import { MDBContainer, MDBTable, MDBTableBody,
      MDBTableHead } from 'mdbreact';
 import { getTableInformation } from "../services/star-wars-service";
 import 'bootstrap/scss/bootstrap.scss';
+import axios from 'axios';
 
 class InfoTable extends Component {
         constructor(props){
@@ -64,7 +65,7 @@ class InfoTable extends Component {
                            </tr>
                        </MDBTableHead>
                        <MDBTableBody>
-                           {ships.map(function(x) {
+                           {ships.map(x => {
                                return <tr>
                                    <td>{ships.indexOf(x) + 1}</td>
                                    <td>{x.name}</td>
@@ -83,12 +84,14 @@ class InfoTable extends Component {
         const p = this.state.currentPage;
 
         this.updatePage(p);
+
+        //axios.get('http://localhost:60231/api/values');
     }
 
     componentDidUpdate(prevProps, prevState){
         const current = this.state.currentPage;
         const lastPage = prevProps.page;
-
+        
         if (current !== lastPage) {
             this.updatePage(current);            
         }

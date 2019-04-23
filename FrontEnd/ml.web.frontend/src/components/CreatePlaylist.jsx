@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import 'bootstrap/scss/bootstrap.scss';
 import {
     MDBContainer, MDBRow,
@@ -38,12 +38,12 @@ class FormPage extends Component {
     updatePage = (x) => {
             getTableInformation(x)
                 .then((info) => {
-                    this.setState({ info: info })
+                    this.setState({ info: info})
                 });
         }
 
-    addToList = (event)  => {
-        this.setState((prevState) => ({
+    addToList = (event) => {
+        this.setState((prevState) => ({          
             newShips: [...this.state.newShips, prevState.info.splice(prevState.info.indexOf(event), 1)],
         }));
     }
@@ -51,38 +51,38 @@ class FormPage extends Component {
     removeFromList = (event) => {
         this.setState({
             newShips: this.state.newShips.filter(function(el){
-                return el != event;
+                return el !== event;
             })
         });
     }
 
 
     render() {
-        console.log("Render");
         const { newShips } = this.state;
+        console.log(newShips);
 
-        const availablePlaylist = this.state.info.map(x =>
-         <tr>
-             <td>
+        const availablePlaylist = this.state.info.map(x => 
+        <tr>
+             <td key={x.crew}>
                  {x.name}
              </td>
              <button onClick={() => this.addToList(x)}>
                 Add To Playlist
              </button>
-         </tr>)
+        </tr>)
 
          const personalPlaylist = newShips.map(ship => 
             <ul>
-                <li>                   
+                <li key={ship[0].crew}>
                     {ship[0].name}
                     <br/>
                     {ship[0].starship_class}
                 </li>
                 <button onClick={() => this.removeFromList(ship)}>
-                Remove From Playlist
+                  Remove From Playlist
                 </button>
             </ul>
-         ) 
+         )
 
         return (
             <div className="row">
@@ -114,7 +114,7 @@ class FormPage extends Component {
                         <div>
                             <MDBTable hover>
                                 <MDBTableBody>
-                                    {personalPlaylist}                            
+                                    {personalPlaylist}
                                 </MDBTableBody>
                             </MDBTable>
                         </div>
@@ -129,9 +129,9 @@ class FormPage extends Component {
         this.updatePage(p);
     }
 
-     shouldComponentUpdate(nextProps, nextState){
-         return !(isEqual(this.props, nextProps) && isEqual(this.state, nextState));
-     }
+    //  shouldComponentUpdate(nextProps, nextState){
+    //      return !(isEqual(this.props, nextProps) && isEqual(this.state, nextState));
+    //  }
 
     componentDidUpdate(prevProps, prevState) {
         const current = this.state.currentPage;
@@ -144,7 +144,7 @@ class FormPage extends Component {
         {
             this.updatePage(lastPage);
         }
-        
+
     }
 }
 
