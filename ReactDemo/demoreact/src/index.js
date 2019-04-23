@@ -24,13 +24,22 @@ class StarWarsPeopleList extends Component {
         }
 
         return (
-            <ul>
-                {
-                    people.map(person => {
-                        return <li>{person.name}</li>
-                    })
-                }
-            </ul>
+            <li>
+                {Object.keys(people).map(function(key) {
+                    return <div>{key} : {people[key]}</div>
+                })}               
+            </li>
+            // <ul>
+            //     {
+            //         people.map(person => {                        
+            //             return <li>
+            //             {person.name}
+            //             <br/>
+            //             {person.mass}
+            //             </li>                       
+            //         })
+            //     }
+            // </ul>
         );
     }
 
