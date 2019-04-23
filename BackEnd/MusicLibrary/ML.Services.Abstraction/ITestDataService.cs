@@ -5,6 +5,6 @@ namespace ML.Services.Abstraction
 {
     public interface ITestDataService
     {
-        IEnumerable<User> Test();
+        IEnumerable<Track> Test();
     }
 }

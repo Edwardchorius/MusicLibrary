@@ -18,11 +18,11 @@ namespace ML.Services.Data
             this.data = dataUnitOfWork;
         }
 
-        public IEnumerable<User> Test()
+        public IEnumerable<Track> Test()
         {
-            var users = this.data.UserRepository.All();
+            var tracks = this.data.TrackRepository.All();
 
-            return users;
+            return tracks;
         }
     }
 }

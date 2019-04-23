@@ -12,6 +12,9 @@ namespace ML.Data.Models
         public int Id { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public string Author { get; set; }
 
         [Required]
@@ -24,7 +27,7 @@ namespace ML.Data.Models
         public Genre Genre { get; set; }
 
         [Required]
-        public decimal Cost { get; set; }
+        public double Cost { get; set; }
 
         public ICollection<UsersTracks> UsersTracks { get; set; }
 

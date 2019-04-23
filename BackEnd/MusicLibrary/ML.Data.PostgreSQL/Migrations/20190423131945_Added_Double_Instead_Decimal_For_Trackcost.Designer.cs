@@ -3,15 +3,17 @@ using System;
 using ML.Data.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ML.Data.PostgreSQL.Migrations
 {
     [DbContext(typeof(PostgreSQLDataContext))]
-    partial class PostgreSQLDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190423131945_Added_Double_Instead_Decimal_For_Trackcost")]
+    partial class Added_Double_Instead_Decimal_For_Trackcost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,9 +86,6 @@ namespace ML.Data.PostgreSQL.Migrations
                     b.Property<string>("ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
 
                     b.Property<string>("Performer")
                         .IsRequired();

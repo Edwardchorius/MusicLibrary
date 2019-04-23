@@ -7,6 +7,7 @@ namespace ML.Data.Abstraction
     {
         IUserRepository UserRepository { get; }
         IWalletRepository WalletRepository { get; }
+        ITrackRepository TrackRepository { get; }
 
         int SaveChanges();
                

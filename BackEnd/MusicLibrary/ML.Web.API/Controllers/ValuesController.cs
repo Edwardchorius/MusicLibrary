@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ML.Services.Abstraction;
+using Newtonsoft.Json;
 
 namespace ML.Web.API.Controllers
 {
-    [Route("api/[controller]")]
-    [AutoValidateAntiforgeryToken]
+    [Route("api/[controller]")] 
     public class ValuesController : Controller
     {
         private readonly ITestDataService service;
@@ -20,23 +20,25 @@ namespace ML.Web.API.Controllers
 
         // GET api/values
         [HttpGet]
-        public IActionResult Get()
+        public string Get()
         {
             var data = service.Test();
 
-            return Json(data);
+            string json = JsonConvert.SerializeObject(data);
+
+            return json;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // POST api/values/5
+        [HttpPost("{id}")]
+        public string Get([FromBody]object id)
         {
             return "value";
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post(string value)
         {
             Console.WriteLine();
         }
@@ -51,18 +53,6 @@ namespace ML.Web.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
-
-        private void Recursion(int number)
-        {
-            Console.WriteLine(number);
-
-            if(number == 10)
-            {
-                return;
-            }
-
-            Recursion(number++);
         }
     }
 }
