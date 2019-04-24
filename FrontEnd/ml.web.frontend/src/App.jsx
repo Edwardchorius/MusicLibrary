@@ -6,6 +6,7 @@ import NavBar from './components/HeaderComponent/NavBar';
 import CreatePlaylist from './components/CreatePlaylist';
 import Registration from './components/Registration';
 import AvailableTracks from './components/AvailableTracks';
+import CreateMusicList from './components/CreateMusicList';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <NavBar />
           <Switch>
           <Route name="tracks" exact path="/tracks" component={AvailableTracks} />
+          <Route name="createmusiclist" exact path ="/createmusiclist" component={CreateMusicList} />
           <Route name="home" exact path="/" component={Home} />
           <Route name="createplaylist" exact path="/createplaylist" component={CreatePlaylist} />
           <Route name="register" exact path="/register" component={Registration} />

@@ -23,10 +23,13 @@ class AvailableTracks extends Component{
         super(props);
 
         this.state = {
-            tracks: []
+            tracks: [],
+            currentPage: 1,
         };
 
         this.getTrackInfo = this.getTrackInfo.bind(this);
+        this.setNextPage = this.setNextPage.bind(this);
+        this.setPreviousPage = this.setPreviousPage.bind(this);
     }
 
 
@@ -36,7 +39,8 @@ class AvailableTracks extends Component{
 
         return(
             <div>
-            <MDBTable hover>
+                <MDBContainer>
+            <MDBTable hover className="float-center">
                        <MDBTableHead>
                            <tr>
                                <th>Name</th>
@@ -51,27 +55,62 @@ class AvailableTracks extends Component{
                                    <td>{x.Name}</td>
                                    <td>{x.Duration}</td>
                                    <td>{x.Performer}</td>
-                                   <td>{x.Cost}</td>
+                                   <td>${x.Cost}</td>
                                </tr>
                            })}
                        </MDBTableBody>
                    </MDBTable> 
+                   <button  onClick={this.setPreviousPage} className="float-left">previous page</button>
+                   <button  onClick={this.setNextPage} className="float-right">next page</button>
+                   </MDBContainer>
             </div>
         );
     }
 
-     async getTrackInfo() {
-        return await axios.get('http://localhost:60231/api/values')
-        .then(res => res.data);
+    getTrackInfo(page) {
+
+        return axios.get(`http://localhost:60231/api/values?page=${page}`)
+        .then(res => res.data)
+        .then(data => this.setState({tracks : data}));
     };
 
 
-    async componentDidMount() {
-        const data = await this.getTrackInfo();
-        console.log(data);
+    setPreviousPage() {
+        const {currentPage} = this.state;
+        if (currentPage === 1){
+            return this.setState({currentPage: 3})
+        }
 
-        this.setState({tracks: data});
+        return this.setState({currentPage: this.state.currentPage - 1})
     }
+
+
+    setNextPage() {
+        const {currentPage} = this.state;
+        if (currentPage === 3){
+            return this.setState({currentPage: 1})
+        }
+
+        return this.setState({currentPage: this.state.currentPage + 1})
+    }
+
+
+     async componentDidMount() {
+        const page = this.state.currentPage;
+
+        const data = await this.getTrackInfo(page);
+        console.log(data);
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        const current = this.state.currentPage;
+        const lastPage = prevState.currentPage;
+        
+        if (current !== lastPage) {
+            this.getTrackInfo(current);           
+        }
+    }
+
 }
 
 export default AvailableTracks;
