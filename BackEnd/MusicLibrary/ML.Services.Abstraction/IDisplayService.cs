@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ML.Services.Abstraction
 {
-    public interface ITestDataService
+    public interface IDisplayService
     {
-        IEnumerable<Track> Test();
+        IEnumerable<Track> DisplayTracks(int page);
     }
 }

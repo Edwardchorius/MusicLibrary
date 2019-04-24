@@ -8,6 +8,6 @@ namespace ML.Data.Abstraction.Repositories
 {
     public interface ITrackRepository : IDataRepository<Track>
     {
-
+        IEnumerable<Track> TakeByPage(int page);
     }
 }

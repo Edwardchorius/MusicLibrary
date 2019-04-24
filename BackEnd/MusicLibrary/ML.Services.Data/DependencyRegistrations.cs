@@ -6,7 +6,7 @@ public static class DependencyRegistrations
 {
     public static IServiceCollection RegisterServicesDataDependencies(this IServiceCollection services)
     {
-        services.AddTransient<ITestDataService, TestDataService>();
+        services.AddTransient<IDisplayService, DisplayService>();
 
         return services;
     }

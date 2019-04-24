@@ -11,18 +11,18 @@ namespace ML.Web.API.Controllers
     [Route("api/[controller]")] 
     public class ValuesController : Controller
     {
-        private readonly ITestDataService service;
+        private readonly IDisplayService displayService;
 
-        public ValuesController(ITestDataService service)
+        public ValuesController(IDisplayService service)
         {
-            this.service = service;
+            this.displayService = service;
         }
 
         // GET api/values
         [HttpGet]
-        public string Get()
+        public string Get(string page)
         {
-            var data = service.Test();
+            var data = displayService.DisplayTracks(int.Parse(page));
 
             string json = JsonConvert.SerializeObject(data);
 

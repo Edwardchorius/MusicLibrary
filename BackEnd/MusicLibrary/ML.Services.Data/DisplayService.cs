@@ -9,20 +9,18 @@ using System.Linq;
 
 namespace ML.Services.Data
 {
-    internal class TestDataService : ITestDataService
+    internal class DisplayService : IDisplayService
     {
         private readonly IDataUnitOfWork data;
 
-        public TestDataService(IDataUnitOfWork dataUnitOfWork)
+        public DisplayService(IDataUnitOfWork dataUnitOfWork)
         {
             this.data = dataUnitOfWork;
         }
 
-        public IEnumerable<Track> Test()
+        public IEnumerable<Track> DisplayTracks(int page)
         {
-            var tracks = this.data.TrackRepository.All();
-
-            return tracks;
+            return this.data.TrackRepository.TakeByPage(page);
         }
     }
 }
