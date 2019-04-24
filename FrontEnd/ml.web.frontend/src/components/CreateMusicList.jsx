@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'bootstrap/scss/bootstrap.scss';
 import { MDBContainer, MDBRow, MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import axios from 'axios';
+import qs from 'qs';
 
 class CreateMusicList extends Component{
     constructor(props) {
@@ -10,7 +11,8 @@ class CreateMusicList extends Component{
         this.state = {
             tracks: [],
             playlist: [],
-            currentPage: 1
+            currentPage: 1,
+            doesExist: false
          }
 
         this.getTrackInfo = this.getTrackInfo.bind(this);
@@ -18,6 +20,7 @@ class CreateMusicList extends Component{
         this.setPreviousPage = this.setPreviousPage.bind(this);
         this.removeFromList = this.removeFromList.bind(this);
         this.addToList = this.addToList.bind(this);
+        this.createMusicList = this.createMusicList.bind(this);
      }
 
 
@@ -86,24 +89,59 @@ class CreateMusicList extends Component{
                             </MDBTable>
                         </div>
                     </MDBContainer>
+                    {playlist.length ? <button onClick={this.createMusicList}>Create Musiclist</button> : null}
                 </div>
             </div>
          );
      }
 
-     removeFromList(event) {
+
+     createMusicList() {
+         const { playlist } = this.state;
+
+         let model = {Name: "PlayListOne",
+            Tracks: ["test1", "test2"]}
+         console.log(playlist)
+         console.log(model)
+
+        axios({
+            url: 'http://localhost:60231/api/values',
+            method: 'post',
+            headers: {'content-type' : 'application.json'},
+            params: model
+        })
+        .then(function (response){
+            console.log(response.data)
+        })
+        .catch(function (error){
+            console.log(error);
+        });
+     }
+
+
+     removeFromList(track) {
         this.setState({
             playlist: this.state.playlist.filter(function(el){
-                return el !== event;
+                return el !== track;
             })
         });
     }
 
 
-     addToList(event) {
-        this.setState((prevState) => ({          
-            playlist: [...this.state.playlist, prevState.tracks[prevState.tracks.indexOf(event)]],
-        }));
+     addToList(track) {
+         const { playlist } = this.state;
+         
+         if(playlist.find(x => x.Name == track.Name))
+         {
+            this.setState({doesExist: true})
+         }
+
+         else{
+             this.setState((prevState) => ({          
+                 playlist: [...this.state.playlist, prevState.tracks[prevState.tracks.indexOf(track)]],
+                 doesExist: false
+                }))
+            };
     }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ML.Services.Abstraction;
+using ML.Web.API.ViewModels;
 using Newtonsoft.Json;
 
 namespace ML.Web.API.Controllers
@@ -38,7 +39,7 @@ namespace ML.Web.API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post(string value)
+        public void Post(PlaylistModel result)
         {
             Console.WriteLine();
         }
