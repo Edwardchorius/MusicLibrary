@@ -77,7 +77,8 @@ class CreateMusicList extends Component{
                         </div>
                     </MDBContainer>
                 </div>
-                <div className={["col-md-6", visible ? null : 'fadeOut'].join(' ')}>
+                {visible ? 
+                <div className="col-md-6">
                     <MDBContainer className="float-right">
                         <MDBRow>
                             <MDBCol md="6">
@@ -93,7 +94,11 @@ class CreateMusicList extends Component{
                         </div>
                     </MDBContainer>
                     {playlist.length ? <button onClick={this.createMusicList}>Create Musiclist</button> : null}
+                </div> : 
+                <div className={["col-md-6", 'fadeOut'].join(' ')}>
+                        Playlist created successfully!
                 </div>
+                 }
             </div>
          );
      }

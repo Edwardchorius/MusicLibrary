@@ -39,8 +39,8 @@ namespace ML.Data.PostgreSQL.Repositories
             {
                 var manyToMany = new TracksPlayLists();
                 manyToMany.PlayList = newPlaylist;
-                manyToMany.Track = track;
-                manyToMany.TrackId = this.set.Where(tr => tr.Name == track.Name).Select(tr => tr.Id).FirstOrDefault();
+                var trackId = this.context.Tracks.FirstOrDefault(tr => tr.Name == track.Name).Id;
+                manyToMany.TrackId = trackId;
 
                 newPlaylist.TracksPlayLists.Add(manyToMany);
             }
