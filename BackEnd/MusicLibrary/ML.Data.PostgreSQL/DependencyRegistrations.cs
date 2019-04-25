@@ -11,6 +11,7 @@ public static class DependencyRegistrations
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IWalletRepository, WalletRepository>();
         services.AddScoped<ITrackRepository, TrackRepository>();
+        services.AddScoped<IPlaylistRepository, PlaylistRepository>();
         services.AddScoped<IPostgreSQLDataContext, PostgreSQLDataContext>();
 
         services.AddEntityFrameworkNpgsql()

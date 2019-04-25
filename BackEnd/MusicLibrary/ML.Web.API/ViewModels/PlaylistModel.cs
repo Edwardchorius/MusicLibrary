@@ -7,7 +7,7 @@ namespace ML.Web.API.ViewModels
 {
     public class PlaylistModel
     {
-        public string[] Tracks { get; set; }
+        public TrackModel[] Tracks { get; set; }
 
         public string Name { get; set; }
     }

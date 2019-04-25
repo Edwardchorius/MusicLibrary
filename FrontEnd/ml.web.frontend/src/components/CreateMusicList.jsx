@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import 'bootstrap/scss/bootstrap.scss';
 import { MDBContainer, MDBRow, MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import axios from 'axios';
-import qs from 'qs';
+import qs from "qs";
+import action from 'mobx';
 
 class CreateMusicList extends Component{
     constructor(props) {
@@ -99,17 +100,13 @@ class CreateMusicList extends Component{
      createMusicList() {
          const { playlist } = this.state;
 
-         let model = {Name: "PlayListOne",
-            Tracks: ["test1", "test2"]}
-         console.log(playlist)
-         console.log(model)
+         console.log(playlist);
 
         axios({
             url: 'http://localhost:60231/api/values',
             method: 'post',
-            headers: {'content-type' : 'application.json'},
-            params: model
-        })
+            data: qs.stringify({Tracks: playlist}),
+            })       
         .then(function (response){
             console.log(response.data)
         })

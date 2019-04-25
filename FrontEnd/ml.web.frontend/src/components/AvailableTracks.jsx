@@ -47,6 +47,7 @@ class AvailableTracks extends Component{
                                <th>Duration</th>
                                <th>Performer</th>
                                <th>Cost</th>
+                               <th>Performer</th>
                            </tr>
                        </MDBTableHead>
                        <MDBTableBody>
@@ -56,6 +57,7 @@ class AvailableTracks extends Component{
                                    <td>{x.Duration}</td>
                                    <td>{x.Performer}</td>
                                    <td>${x.Cost}</td>
+                                   <td>{x.Performer}</td>
                                </tr>
                            })}
                        </MDBTableBody>

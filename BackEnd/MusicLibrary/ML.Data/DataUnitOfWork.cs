@@ -16,18 +16,21 @@ namespace ML.Data
             IFileSystemDataContext fileSystemContext,
             IUserRepository userRepository,
             IWalletRepository walletRepository,
-            ITrackRepository trackRepository)
+            ITrackRepository trackRepository,
+            IPlaylistRepository playlistRepository)
         {
             this.postgreSQLDataContext = postgreSQLDataContext;
             this.fileSystemContext = fileSystemContext;
             this.UserRepository = userRepository;
             this.WalletRepository = walletRepository;
             this.TrackRepository = trackRepository;
+            this.PlaylistRepository = playlistRepository;
         }
 
         public IUserRepository UserRepository { get; }
         public IWalletRepository WalletRepository { get; }
         public ITrackRepository TrackRepository { get; }
+        public IPlaylistRepository PlaylistRepository { get; }
         
         public int SaveChanges()
         {

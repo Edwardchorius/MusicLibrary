@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ML.Data.Models;
 using ML.Services.Abstraction;
 using ML.Web.API.ViewModels;
 using Newtonsoft.Json;
@@ -13,10 +14,13 @@ namespace ML.Web.API.Controllers
     public class ValuesController : Controller
     {
         private readonly IDisplayService displayService;
+        private readonly ICreateService createService;
 
-        public ValuesController(IDisplayService service)
+        public ValuesController(IDisplayService displayService,
+            ICreateService createService)
         {
-            this.displayService = service;
+            this.displayService = displayService;
+            this.createService = createService;
         }
 
         // GET api/values
@@ -41,6 +45,8 @@ namespace ML.Web.API.Controllers
         [HttpPost]
         public void Post(PlaylistModel result)
         {
+            var tracks = TransformViewModelToTracks(result.Tracks);
+            var newPlaylist = createService.CreatePlaylist("randomName", "demoDescription", tracks);
             Console.WriteLine();
         }
 
@@ -54,6 +60,28 @@ namespace ML.Web.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [NonAction]
+        public ICollection<Track> TransformViewModelToTracks(ICollection<TrackModel> viewModel)
+        {
+            List<Track> tracksToReturn = new List<Track>();
+
+            foreach (var track in viewModel)
+            {
+                Track newTrack = new Track()
+                {
+                    Name = track.Name,
+                    Author = track.Author,
+                    Duration = track.Duration,
+                    Cost = track.Cost,
+                    Performer = track.Performer
+                };
+
+                tracksToReturn.Add(newTrack);
+            }
+
+            return tracksToReturn;
         }
     }
 }

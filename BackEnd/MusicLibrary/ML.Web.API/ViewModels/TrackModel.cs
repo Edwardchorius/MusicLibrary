@@ -9,10 +9,12 @@ namespace ML.Web.API.ViewModels
     {
         public string Name { get; set; }
 
-        //public string Author { get; set; }
+        public string Author { get; set; }
 
-        //public double Cost { get; set; }
+        public double Cost { get; set; }
 
-        //public int Duration { get; set; }
+        public int Duration { get; set; }
+
+        public string Performer { get; set; }
     }
 }
