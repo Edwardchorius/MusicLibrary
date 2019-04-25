@@ -3,7 +3,7 @@ import 'bootstrap/scss/bootstrap.scss';
 import { MDBContainer, MDBRow, MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import axios from 'axios';
 import qs from "qs";
-import action from 'mobx';
+import '../index.css';
 
 class CreateMusicList extends Component{
     constructor(props) {
@@ -13,7 +13,8 @@ class CreateMusicList extends Component{
             tracks: [],
             playlist: [],
             currentPage: 1,
-            doesExist: false
+            doesExist: false,
+            visible: true
          }
 
         this.getTrackInfo = this.getTrackInfo.bind(this);
@@ -26,7 +27,8 @@ class CreateMusicList extends Component{
 
 
      render() {
-        const { tracks, playlist } = this.state;
+        const { tracks, playlist, visible } = this.state;
+        
 
         const availableTracks = tracks.map(tr => 
             <tr>
@@ -75,7 +77,7 @@ class CreateMusicList extends Component{
                         </div>
                     </MDBContainer>
                 </div>
-                <div className="col-md-6">
+                <div className={["col-md-6", visible ? null : 'fadeOut'].join(' ')}>
                     <MDBContainer className="float-right">
                         <MDBRow>
                             <MDBCol md="6">
@@ -113,6 +115,8 @@ class CreateMusicList extends Component{
         .catch(function (error){
             console.log(error);
         });
+
+        this.setState({visible:false, playlist: []})
      }
 
 
@@ -136,7 +140,8 @@ class CreateMusicList extends Component{
          else{
              this.setState((prevState) => ({          
                  playlist: [...this.state.playlist, prevState.tracks[prevState.tracks.indexOf(track)]],
-                 doesExist: false
+                 doesExist: false,
+                 visible: true
                 }))
             };
     }
