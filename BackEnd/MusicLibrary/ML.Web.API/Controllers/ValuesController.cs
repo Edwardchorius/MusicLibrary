@@ -46,7 +46,7 @@ namespace ML.Web.API.Controllers
         public void Post(PlaylistModel result)
         {
             var tracks = TransformViewModelToTracks(result.Tracks);
-            var newPlaylist = createService.CreatePlaylist("randomName", "demoDescription", tracks);
+            var newPlaylist = createService.CreatePlaylist(result.Name, result.Description, tracks);
             Console.WriteLine();
         }
 

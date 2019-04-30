@@ -10,5 +10,7 @@ namespace ML.Web.API.ViewModels
         public TrackModel[] Tracks { get; set; }
 
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

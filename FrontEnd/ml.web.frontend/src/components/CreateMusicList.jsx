@@ -4,6 +4,13 @@ import { MDBContainer, MDBRow, MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import axios from 'axios';
 import qs from "qs";
 import '../index.css';
+import { truncateSync } from 'fs';
+
+
+const camelCase = (myString) => (
+    myString.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+);
+
 
 class CreateMusicList extends Component{
     constructor(props) {
@@ -14,7 +21,10 @@ class CreateMusicList extends Component{
             playlist: [],
             currentPage: 1,
             doesExist: false,
-            visible: true
+            visible: true,
+            musiclistName: '',
+            musiclistDescription: '',
+            isValid: false
          }
 
         this.getTrackInfo = this.getTrackInfo.bind(this);
@@ -27,7 +37,7 @@ class CreateMusicList extends Component{
 
 
      render() {
-        const { tracks, playlist, visible } = this.state;
+        const { tracks, playlist, visible, musiclistName, musiclistDescription } = this.state;
         
 
         const availableTracks = tracks.map(tr => 
@@ -93,7 +103,34 @@ class CreateMusicList extends Component{
                             </MDBTable>
                         </div>
                     </MDBContainer>
-                    {playlist.length ? <button onClick={this.createMusicList}>Create Musiclist</button> : null}
+                    {playlist.length ? 
+                    <div>
+                    <button onClick={this.createMusicList}>Create Musiclist</button>
+                    <input
+                    type="text"
+                    name="musiclistName"
+                    id="musiclist-name"
+                    value={musiclistName}
+                    onChange={this.handleInputElementChange}
+                    onBlur={this.checkValidity}
+                    pattern="[A-Za-z]{5,30}"
+                    required={true}
+                    />
+                    <br/>
+                    <textarea
+                    rows="5"     
+                    cols="50"              
+                    name="musiclistDescription"
+                    id="musiclist-description"
+                    value={musiclistDescription}
+                    onChange={this.handleInputElementChange}
+                    onBlur={this.checkValidity}
+                    pattern="[A-Za-z]{20,100}"
+                    required={true}
+                    />
+                    
+                    </div>
+                    : null}
                 </div> : 
                 <div className={["col-md-6", 'fadeOut'].join(' ')}>
                         Playlist created successfully!
@@ -103,16 +140,36 @@ class CreateMusicList extends Component{
          );
      }
 
+     handleInputElementChange = (event) => {
+         const { value, id } = event.target;
+         const parsedId = camelCase(id);
+
+         this.setState({[parsedId]: value})
+     }
+
+
+     checkValidity = (event) => {
+        const {target} = event;
+        const {isValid} = this.state;
+
+        if(!target.checkValidity()){
+            this.setState({isValid: false})
+        }
+        else{
+            this.setState({isValid: true})
+        }
+    }
+
 
      createMusicList() {
-         const { playlist } = this.state;
+         const { playlist, isValid, musiclistName, musiclistDescription } = this.state;
 
-         console.log(playlist);
-
+         if(isValid)
+         {
         axios({
             url: 'http://localhost:60231/api/values',
             method: 'post',
-            data: qs.stringify({Tracks: playlist}),
+            data: qs.stringify({Tracks: playlist, Name: musiclistName, Description: musiclistDescription}),
             })       
         .then(function (response){
             console.log(response.data)
@@ -121,7 +178,12 @@ class CreateMusicList extends Component{
             console.log(error);
         });
 
-        this.setState({visible:false, playlist: []})
+        this.setState({visible:false, playlist: [], musiclistName: '', musiclistDescription: ''})
+        }
+        else
+        {
+            console.error("Invalid Name");
+        }
      }
 
 
