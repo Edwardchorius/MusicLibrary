@@ -79,6 +79,14 @@ class CreateMusicList extends Component{
                         <div>
                             <MDBTable hover>
                                 <MDBTableBody>
+                                    <tr>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Cost
+                                        </th>
+                                    </tr>
                                     {availableTracks}
                                     <button onClick={this.setPreviousPage} className="float-left">previous page</button>
                                     <button onClick={this.setNextPage} className="float-right">next page</button>
@@ -256,7 +264,6 @@ class CreateMusicList extends Component{
         const page = this.state.currentPage;
 
         const data = await this.getTrackInfo(page);
-        console.log(data);
     }
 
     componentDidUpdate(prevProps, prevState){

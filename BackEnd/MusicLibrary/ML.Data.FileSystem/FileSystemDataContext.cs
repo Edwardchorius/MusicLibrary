@@ -1,6 +1,8 @@
-﻿namespace ML.Data.FileSystem
+﻿
+namespace ML.Data.FileSystem
 {
     internal class FileSystemDataContext : IFileSystemDataContext
     {
+        
     }
 }

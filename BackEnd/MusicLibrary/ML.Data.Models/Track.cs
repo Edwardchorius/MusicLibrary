@@ -29,6 +29,8 @@ namespace ML.Data.Models
         [Required]
         public double Cost { get; set; }
 
+        public string FilePath { get; set; }
+
         public ICollection<UsersTracks> UsersTracks { get; set; }
 
         public ICollection<TracksPlayLists> TracksPlayLists { get; set; }

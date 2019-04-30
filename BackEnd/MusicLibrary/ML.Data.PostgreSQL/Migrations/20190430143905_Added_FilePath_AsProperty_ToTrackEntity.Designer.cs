@@ -3,15 +3,17 @@ using System;
 using ML.Data.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ML.Data.PostgreSQL.Migrations
 {
     [DbContext(typeof(PostgreSQLDataContext))]
-    partial class PostgreSQLDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190430143905_Added_FilePath_AsProperty_ToTrackEntity")]
+    partial class Added_FilePath_AsProperty_ToTrackEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
