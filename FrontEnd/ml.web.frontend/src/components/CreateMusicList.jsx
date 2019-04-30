@@ -4,7 +4,6 @@ import { MDBContainer, MDBRow, MDBCol, MDBTable, MDBTableBody } from "mdbreact";
 import axios from 'axios';
 import qs from "qs";
 import '../index.css';
-import { truncateSync } from 'fs';
 
 
 const camelCase = (myString) => (
@@ -24,7 +23,8 @@ class CreateMusicList extends Component{
             visible: true,
             musiclistName: '',
             musiclistDescription: '',
-            isValid: false
+            isValid: false,
+            postSucceeded: false
          }
 
         this.getTrackInfo = this.getTrackInfo.bind(this);
@@ -37,7 +37,7 @@ class CreateMusicList extends Component{
 
 
      render() {
-        const { tracks, playlist, visible, musiclistName, musiclistDescription } = this.state;
+        const { tracks, playlist, visible, musiclistName, musiclistDescription, postSucceeded } = this.state;
         
 
         const availableTracks = tracks.map(tr => 
@@ -131,9 +131,14 @@ class CreateMusicList extends Component{
                     
                     </div>
                     : null}
-                </div> : 
+                </div> : postSucceeded ?
+                
                 <div className={["col-md-6", 'fadeOut'].join(' ')}>
                         Playlist created successfully!
+                </div>
+                : 
+                <div className={["col-md-6", 'fadeOut'].join(' ')}>
+                        Could not create playlist
                 </div>
                  }
             </div>
@@ -162,17 +167,20 @@ class CreateMusicList extends Component{
 
 
      createMusicList() {
-         const { playlist, isValid, musiclistName, musiclistDescription } = this.state;
+        require('dotenv').config();
+
+         const { playlist, isValid, musiclistName, musiclistDescription, postSucceeded } = this.state;
 
          if(isValid)
          {
         axios({
-            url: 'http://localhost:60231/api/values',
+            url: `http://localhost${process.env.REACT_APP_REQUEST_TO_API_VALUES}`,
             method: 'post',
             data: qs.stringify({Tracks: playlist, Name: musiclistName, Description: musiclistDescription}),
             })       
         .then(function (response){
             console.log(response.data)
+            .then(this.setState({postSucceeded: true}))
         })
         .catch(function (error){
             console.log(error);
@@ -215,8 +223,10 @@ class CreateMusicList extends Component{
 
 
      getTrackInfo(page) {
+        require('dotenv').config();
+        const url = `http://localhost${process.env.REACT_APP_REQUEST_TO_API_VALUES}?page=${page}`;
 
-        return axios.get(`http://localhost:60231/api/values?page=${page}`)
+        return axios.get(url)
         .then(res => res.data)
         .then(data => this.setState({tracks : data}));
     };
